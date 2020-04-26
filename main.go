@@ -58,6 +58,11 @@ func gcd(a, b int) int {
 	return gcd(b, a%b)
 }
 
+// 最小公倍数
+func lcm(a, b int) int {
+	return (a * b) / gcd(a, b)
+}
+
 func comb(n, k int) int {
 	if n < k {
 		return 0
