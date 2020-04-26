@@ -2,13 +2,30 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"io"
 	"os"
 	"strconv"
 )
 
 func main() {
+	a := readi()
+	b := readi()
+	c := readi()
+	d := readi()
 
+	for {
+		c = c - b
+		if c <= 0 {
+			fmt.Println("Yes")
+			break
+		}
+		a = a - d
+		if a <= 0 {
+			fmt.Println("No")
+			break
+		}
+	}
 }
 
 /*-------------------utilities-------------------*/
