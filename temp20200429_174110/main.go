@@ -6,33 +6,28 @@ import (
 	"io"
 	"os"
 	"strconv"
-
-	"github.com/fatih/color"
 )
 
 func main() {
-	s := readString()
-	n := len(s)
+	n := readi()
+	h := make([]int, n+1)
+	h[0] = 0
+	for i := 1; i <= n; i++ {
+		h[i] = readi()
+	}
 
 	dp := make([]int, n+1)
-	dig := 1
-	for i := 0; i < n; i++ {
-		dp[i+1] = int(s[n-1-i]-'0')*dig + dp[i]
-		dig *= 10
+	for i := 0; i <= n; i++ {
+		dp[i] = INF
 	}
 
-	dig = 1
-	for i := 0; i < n; i++ {
-		color.Green("%d", int(s[n-1-i]-'0')*dig+dp[i])
-		dig *= 10
+	dp[0] = 0
+	for i := 0; i <= n-2; i++ {
+		chmin(&dp[i+1], dp[i]+abs(h[i]-h[i+1]))
+		chmin(&dp[i+2], dp[i]+abs(h[i]-h[i+2]))
 	}
 
-	fmt.Println(dp)
-}
-
-func mod(x int) int {
-	m := 2019
-	return (x%m + m) % m
+	fmt.Println(dp[n-1])
 }
 
 /*-------------------utilities-------------------*/
@@ -95,14 +90,6 @@ func comb(n, k int) int {
 		return 0
 	}
 	return fac[n] * (finv[k] * finv[n-k] % MOD) % MOD
-}
-
-func reverse(s string) string {
-	r := []rune(s)
-	for i, j := 0, len(r)-1; i < len(r)/2; i, j = i+1, j-1 {
-		r[i], r[j] = r[j], r[i]
-	}
-	return string(r)
 }
 
 /*-------------------init-------------------*/

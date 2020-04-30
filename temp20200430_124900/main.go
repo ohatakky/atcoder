@@ -6,33 +6,36 @@ import (
 	"io"
 	"os"
 	"strconv"
+)
 
-	"github.com/fatih/color"
+var (
+	n     int
+	y     int
+	money = []int{10000, 5000, 1000}
 )
 
 func main() {
-	s := readString()
-	n := len(s)
+	n = readi()
+	y = readi()
 
-	dp := make([]int, n+1)
-	dig := 1
-	for i := 0; i < n; i++ {
-		dp[i+1] = int(s[n-1-i]-'0')*dig + dp[i]
-		dig *= 10
-	}
-
-	dig = 1
-	for i := 0; i < n; i++ {
-		color.Green("%d", int(s[n-1-i]-'0')*dig+dp[i])
-		dig *= 10
-	}
-
-	fmt.Println(dp)
+	fmt.Println(dfs(0, 0))
 }
 
-func mod(x int) int {
-	m := 2019
-	return (x%m + m) % m
+func dfs(depth, sum int) bool {
+	if depth == n {
+		return sum == y
+	}
+	if sum > y {
+		return false
+	}
+
+	for _, m := range money {
+		if dfs(depth+1, sum+m) {
+			return true
+		}
+	}
+
+	return false
 }
 
 /*-------------------utilities-------------------*/
@@ -95,14 +98,6 @@ func comb(n, k int) int {
 		return 0
 	}
 	return fac[n] * (finv[k] * finv[n-k] % MOD) % MOD
-}
-
-func reverse(s string) string {
-	r := []rune(s)
-	for i, j := 0, len(r)-1; i < len(r)/2; i, j = i+1, j-1 {
-		r[i], r[j] = r[j], r[i]
-	}
-	return string(r)
 }
 
 /*-------------------init-------------------*/
