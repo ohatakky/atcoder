@@ -25,14 +25,14 @@ func main() {
 }
 
 func includes(s, t string) bool {
-	for i := 0; i <= len(s)-len(t); i++ {
+	for i := len(s) - len(t); i >= 0; i-- {
 		c := 0
 		for ii := 0; ii < len(t); ii++ {
 			if s[i+ii] == t[ii] || string(s[i+ii]) == "?" {
 				c++
 			}
 			if c == len(t) {
-				ans = s[:len(s)-len(t)] + t
+				ans = s[:i] + t + s[i+len(t):]
 				return true
 			}
 		}
