@@ -24,15 +24,15 @@ func main() {
 	}
 }
 
-func includes(str, s string) bool {
-	for i := 0; i <= len(str)-len(s); i++ {
+func includes(s, t string) bool {
+	for i := 0; i <= len(s)-len(t); i++ {
 		c := 0
-		for ii := 0; ii < len(s); ii++ {
-			if str[i+ii] == s[ii] || string(str[i+ii]) == "?" {
+		for ii := 0; ii < len(t); ii++ {
+			if s[i+ii] == t[ii] || string(s[i+ii]) == "?" {
 				c++
 			}
-			if c == len(s) {
-				ans = str[:len(str)-len(s)] + s
+			if c == len(t) {
+				ans = s[:len(s)-len(t)] + t
 				return true
 			}
 		}
