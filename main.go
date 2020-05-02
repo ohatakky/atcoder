@@ -73,6 +73,13 @@ func comb(n, k int) int {
 	return fac[n] * (finv[k] * finv[n-k] % MOD) % MOD
 }
 
+func factorical(n int) int {
+	if n > 0 {
+		return n * factorical(n-1)
+	}
+	return 1
+}
+
 /*-------------------init-------------------*/
 
 const (
