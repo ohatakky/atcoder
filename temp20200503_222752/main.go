@@ -18,19 +18,18 @@ func main() {
 
 	ans := INF
 	for i := 0; i <= n-k; i++ {
-		tmp := abs(x[i+k-1]-x[i]) + abs(0-x[i])
-		ans = min(ans, tmp)
+		l := x[i]
+		r := x[i+k-1]
+		v1 := abs(l) + abs(r-l)
+		v2 := abs(r) + abs(l-r)
+		ans = min(min(v1, v2), ans)
+
+		// tmp := abs(l-r) + abs(0-x[i])
+		// ans = min(ans, tmp)
 	}
 
 	fmt.Println(ans)
 }
-
-// func abs64(x int64) int64 {
-// 	if x < 0 {
-// 		return -x
-// 	}
-// 	return x
-// }
 
 /*-------------------utilities-------------------*/
 
