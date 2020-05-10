@@ -8,11 +8,16 @@ import (
 	"strconv"
 )
 
+// 荷物の選び方は、それぞれの荷物に対して「入れる or 入れない」の2通りがあるので、全体で2𝑁通りあります。
+// これは再帰関数を用いて計算することができます。 i 番目の荷物を選択するかしないかで分岐させてください。
+
 var (
 	N int
 	W int
 	w []int
 	v []int
+
+	memo [100][10000]int
 )
 
 func main() {
@@ -30,6 +35,9 @@ func main() {
 }
 
 func knapsack(i, b int) int { // i番目の荷物について考える。残り容量はb
+	if memo[i][b] != 0 { // 既に計算したことがあるなら再利用
+		return memo[i][b]
+	}
 	var ret int
 	if i == N { // もう選ぶ荷物がない
 		ret = 0
@@ -40,6 +48,7 @@ func knapsack(i, b int) int { // i番目の荷物について考える。残り�
 		noUse := knapsack(i+1, b)           // i番目の荷物を使わない時
 		ret = max(use, noUse)
 	}
+	memo[i][b] = ret // 結果をメモ
 	return ret
 }
 
@@ -103,13 +112,6 @@ func comb(n, k int) int {
 		return 0
 	}
 	return fac[n] * (finv[k] * finv[n-k] % MOD) % MOD
-}
-
-func factorical(n int) int {
-	if n > 0 {
-		return n * factorical(n-1)
-	}
-	return 1
 }
 
 /*-------------------init-------------------*/
