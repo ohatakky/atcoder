@@ -6,8 +6,10 @@ import (
 	"io"
 	"os"
 	"strconv"
+)
 
-	"github.com/fatih/color"
+const (
+	VISITED = 1
 )
 
 var (
@@ -16,8 +18,7 @@ var (
 	a []int
 	b []int
 
-	graph   map[int][]int
-	visited []int
+	graph map[int][]int
 
 	ans int
 )
@@ -40,28 +41,34 @@ func main() {
 	}
 
 	// init visited
-	visited = make([]int, n+1)
-	for i := 1; i <= n; i++ {
+	visited := make([]int, n+1)
+	for i := 0; i <= n; i++ {
 		visited[i] = -1
 	}
 
-	dfs(1, visited)
+	dfs(1, 1, visited)
 	fmt.Println(ans)
 }
 
-func dfs(depth int, visited []int) {
-	color.Yellow("%d", depth)
-	if visited[depth] != -1 {
-		// return false
-	}
+func dfs(p, depth int, visited []int) {
+	tmpVisited := make([]int, len(visited))
+	copy(tmpVisited, visited)
 	if depth == n {
-		// return true
 		ans++
+		return
 	}
-	visited[depth] = 1
+	tmpVisited[p] = VISITED
 
-	// return dfs(depth+1, visited)
-	dfs(depth+1, visited)
+	dests, ok := graph[p]
+	if !ok {
+		return
+	}
+	for _, d := range dests {
+		if tmpVisited[d] == VISITED {
+			continue
+		}
+		dfs(d, depth+1, tmpVisited)
+	}
 }
 
 /*-------------------utilities-------------------*/
