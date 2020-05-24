@@ -40,15 +40,6 @@ func main() {
 
 	i := 0
 	for {
-		if len(B) == 0 {
-			fmt.Println("yes")
-			break
-		}
-		if i == len(A) {
-			fmt.Println("no")
-			break
-		}
-
 		if A[i] <= B[i] && A[i]+T >= B[i] {
 			A = pop(A)
 			B = pop(B)
@@ -57,8 +48,21 @@ func main() {
 			if len(A) > len(B) {
 				A = pop(A)
 			} else {
+				if A[i] > B[i] {
+					fmt.Println("no")
+					return
+				}
 				i++
 			}
+		}
+
+		if len(B) == 0 {
+			fmt.Println("yes")
+			return
+		}
+		if len(A) == i {
+			fmt.Println("no")
+			return
 		}
 	}
 }
