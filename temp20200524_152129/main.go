@@ -49,7 +49,7 @@ func main() {
 			break
 		}
 
-		if A[i] >= B[i]-T && A[i] <= B[i] {
+		if A[i] <= B[i] && A[i]+T >= B[i] {
 			A = pop(A)
 			B = pop(B)
 			i = 0
