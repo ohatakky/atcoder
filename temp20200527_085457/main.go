@@ -5,25 +5,33 @@ import (
 	"fmt"
 	"io"
 	"os"
-	"sort"
 	"strconv"
-	"strings"
 )
 
 func main() {
 	s := readString()
 	t := readString()
-	s = sortS(s)
-	t = sortS(t)
+	n := len(s)
 
-	fmt.Println(s)
-	fmt.Println(t)
-}
+	mapS := make(map[string]int)
+	mapT := make(map[string]int)
+	for i := 0; i < n; i++ {
+		mapS[string(s[i])] = mapS[string(s[i])] + 1
+		mapT[string(t[i])] = mapT[string(t[i])] + 1
+	}
 
-func sortS(s string) string {
-	tmp := strings.Split(s, "")
-	sort.Strings(tmp)
-	return strings.Join(tmp, "")
+	if len(mapS) == len(mapT) {
+		// for key := range mapS {
+		// 	if mapS[key] != mapT[key] {
+		// 		color.Blue("%s", key)
+		// 		fmt.Println("No")
+		// 		return
+		// 	}
+		// }
+		fmt.Println("Yes")
+	} else {
+		fmt.Println("No")
+	}
 }
 
 /*-------------------utilities-------------------*/
