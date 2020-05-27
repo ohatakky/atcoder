@@ -21,13 +21,16 @@ func main() {
 	}
 
 	if len(mapS) == len(mapT) {
-		// for key := range mapS {
-		// 	if mapS[key] != mapT[key] {
-		// 		color.Blue("%s", key)
-		// 		fmt.Println("No")
-		// 		return
-		// 	}
-		// }
+		for key := range mapS {
+			_, ok := mapT[key]
+			if !ok {
+				continue
+			}
+			if mapS[key] != mapT[key] {
+				fmt.Println("No")
+				return
+			}
+		}
 		fmt.Println("Yes")
 	} else {
 		fmt.Println("No")
