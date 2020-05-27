@@ -13,35 +13,38 @@ func main() {
 	t := readString()
 	n := len(s)
 
+	mapST := make(map[string]string)
 	mapS := make(map[string]int)
 	mapT := make(map[string]int)
 	for i := 0; i < n; i++ {
 		mapS[string(s[i])] = mapS[string(s[i])] + 1
 		mapT[string(t[i])] = mapT[string(t[i])] + 1
+		firstS, ok := mapST[string(s[i])]
+		if !ok {
+			mapST[string(s[i])] = string(t[i])
+		} else {
+			if firstS != string(t[i]) {
+				fmt.Println("No")
+				return
+			}
+		}
 	}
-	fmt.Println(mapS)
-	fmt.Println(mapT)
 
-	// 文字の種類の数が異なるとき
 	if len(mapS) != len(mapT) {
 		fmt.Println("No")
 		return
 	}
 
-	// 同じ文字の数が異なるとき
-	for key := range mapS {
-		_, ok := mapT[key]
-		if !ok {
-			continue
-		}
-		if mapS[key] != mapT[key] {
-			fmt.Println("No")
-			return
-		}
-	}
-
-	// TODO
-	// case: aab cdd
+	// for key := range mapS {
+	// 	_, ok := mapT[key]
+	// 	if !ok {
+	// 		continue
+	// 	}
+	// 	if mapS[key] != mapT[key] {
+	// 		fmt.Println("No")
+	// 		return
+	// 	}
+	// }
 
 	fmt.Println("Yes")
 }
