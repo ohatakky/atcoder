@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"io"
 	"os"
 	"sort"
@@ -12,12 +13,26 @@ func main() {
 	n := readi()
 
 	d := divisor(n)
+	s := strconv.Itoa(d[len(d)/2])
+	fmt.Println(len(s))
 }
 
+// func divisor(n int) (res []int) {
+// 	for i := 1; i <= n; i++ {
+// 		if n%i == 0 {
+// 			res = append(res, n/i)
+// 		}
+// 	}
+// 	return
+// }
+
 func divisor(n int) (res []int) {
-	for i := 1; i <= n; i++ {
+	for i := 1; i*i <= n; i++ {
 		if n%i == 0 {
-			res = append(res, n/i)
+			res = append(res, i)
+			if i*i != n {
+				res = append(res, n/i)
+			}
 		}
 	}
 	sort.Ints(res)
