@@ -19,22 +19,31 @@ func main() {
 		mapS[string(s[i])] = mapS[string(s[i])] + 1
 		mapT[string(t[i])] = mapT[string(t[i])] + 1
 	}
+	fmt.Println(mapS)
+	fmt.Println(mapT)
 
-	if len(mapS) == len(mapT) {
-		for key := range mapS {
-			_, ok := mapT[key]
-			if !ok {
-				continue
-			}
-			if mapS[key] != mapT[key] {
-				fmt.Println("No")
-				return
-			}
-		}
-		fmt.Println("Yes")
-	} else {
+	// 文字の種類の数が異なるとき
+	if len(mapS) != len(mapT) {
 		fmt.Println("No")
+		return
 	}
+
+	// 同じ文字の数が異なるとき
+	for key := range mapS {
+		_, ok := mapT[key]
+		if !ok {
+			continue
+		}
+		if mapS[key] != mapT[key] {
+			fmt.Println("No")
+			return
+		}
+	}
+
+	// TODO
+	// case: aab cdd
+
+	fmt.Println("Yes")
 }
 
 /*-------------------utilities-------------------*/
