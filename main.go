@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"io"
 	"os"
+	"sort"
 	"strconv"
 )
 
@@ -50,7 +51,6 @@ func chmax(x *int, y int) bool {
 	return false
 }
 
-// 最大公約数
 func gcd(a, b int) int {
 	if b == 0 {
 		return a
@@ -58,7 +58,6 @@ func gcd(a, b int) int {
 	return gcd(b, a%b)
 }
 
-// 最小公倍数
 func lcm(a, b int) int {
 	return (a * b) / gcd(a, b)
 }
@@ -99,6 +98,19 @@ func permutations(arr []int) [][]int {
 	}
 	helper(arr, len(arr))
 	return res
+}
+
+func divisor(n int) (res []int) {
+	for i := 1; i*i <= n; i++ {
+		if n%i == 0 {
+			res = append(res, i)
+			if i*i != n {
+				res = append(res, n/i)
+			}
+		}
+	}
+	sort.Ints(res)
+	return
 }
 
 /*-------------------init-------------------*/
