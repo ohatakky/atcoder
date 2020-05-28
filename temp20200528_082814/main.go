@@ -11,19 +11,41 @@ import (
 
 func main() {
 	n := readi()
-	b := make([]int, n-1)
-	for i := 0; i < n-1; i++ {
-		b[i] = readi()
+	B := make([]int, n+1)
+	for i := 2; i < n+1; i++ {
+		B[i] = readi()
 	}
+
 	mapB := make(map[int][]int)
-	for i := 0; i < n-1; i++ {
-		mapB[i] = make([]int, 0)
-	}
-	for i := 0; i < n-1; i++ {
-		mapB[b[i]] = append(mapB[b[i]], i)
+	for i := 2; i < n+1; i++ {
+		mapB[B[i]] = append(mapB[B[i]], i)
 	}
 
 	fmt.Println(mapB)
+	agg := make(map[int]int)
+	for i := n; i >= 2; i-- {
+		buka, ok := mapB[i]
+		if !ok {
+			agg[i] = 1
+		} else {
+			agg[i] = salary(buka)
+		}
+	}
+
+	fmt.Println(agg)
+	buka := mapB[1]
+	fmt.Println(buka)
+	fmt.Println(salary(buka))
+}
+
+func salary(buka []int) (res int) {
+	if len(buka) == 1 {
+		res = (2 * buka[0]) + 1
+	} else {
+		sort.Ints(buka)
+		res = buka[len(buka)-1] + buka[0] + 1
+	}
+	return
 }
 
 /*-------------------utilities-------------------*/
