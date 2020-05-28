@@ -9,6 +9,10 @@ import (
 	"strconv"
 )
 
+var (
+	agg = make(map[int]int)
+)
+
 func main() {
 	n := readi()
 	B := make([]int, n+1)
@@ -21,8 +25,6 @@ func main() {
 		mapB[B[i]] = append(mapB[B[i]], i)
 	}
 
-	fmt.Println(mapB)
-	agg := make(map[int]int)
 	for i := n; i >= 2; i-- {
 		buka, ok := mapB[i]
 		if !ok {
@@ -32,18 +34,20 @@ func main() {
 		}
 	}
 
-	fmt.Println(agg)
 	buka := mapB[1]
-	fmt.Println(buka)
 	fmt.Println(salary(buka))
 }
 
 func salary(buka []int) (res int) {
 	if len(buka) == 1 {
-		res = (2 * buka[0]) + 1
+		res = (2 * agg[buka[0]]) + 1
 	} else {
-		sort.Ints(buka)
-		res = buka[len(buka)-1] + buka[0] + 1
+		tmp := make([]int, 0)
+		for _, b := range buka {
+			tmp = append(tmp, agg[b])
+		}
+		sort.Ints(tmp)
+		res = tmp[len(tmp)-1] + tmp[0] + 1
 	}
 	return
 }
