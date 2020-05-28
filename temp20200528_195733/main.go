@@ -15,14 +15,54 @@ func main() {
 	for i := 0; i < 3; i++ {
 		ng[i] = readi()
 	}
+	sort.Ints(ng)
 
 	if abs(ng[0]-ng[1]) == 1 && abs(ng[0]-ng[2]) == 2 && abs(ng[1]-ng[2]) == 1 {
 		fmt.Println("NO")
 		return
 	}
 
-	if n > 297 {
+	if include(ng, n) {
+		fmt.Println("NO")
+		return
+	}
 
+	if n == 300 {
+		for i := 2; i >= 0; i-- {
+			if ng[i]%3 == 0 {
+				fmt.Println("NO")
+				return
+			}
+		}
+	}
+
+	if n == 299 {
+		c := 0
+		for i := 2; i >= 0; i-- {
+			if ng[i]%3 == 2 {
+				c++
+			}
+			if c == 1 && ng[i]%3 == 1 {
+				fmt.Println("NO")
+				return
+			}
+		}
+	}
+
+	if n == 298 {
+		c := 0
+		for i := 2; i >= 0; i-- {
+			if ng[i]%3 == 1 {
+				c++
+			}
+			if c == 1 && ng[i]%3 == 0 {
+				c++
+			}
+			if c == 2 && ng[i]%3 == 2 {
+				fmt.Println("NO")
+				return
+			}
+		}
 	}
 
 	fmt.Println("YES")
