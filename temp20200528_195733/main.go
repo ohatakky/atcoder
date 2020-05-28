@@ -28,52 +28,46 @@ func main() {
 	}
 
 	if n > 291 {
-		if n == 300 {
-			for i := 2; i >= 0; i-- {
-				if ng[i]%3 == 0 {
-					fmt.Println("NO")
-					return
+		var c int
+		if n > 297 {
+			c = 2
+		} else if n > 294 {
+			c = 1
+		} else {
+			c = 0
+		}
+		for i := 1; i <= 100; i++ {
+			tmp := n - (i * 3)
+
+			if tmp%3 == 0 {
+				for ii := 0; ii < 3; ii++ {
+					if ng[ii]%3 == 0 {
+						c++
+					}
 				}
+				tmp = n - (i * 3) + 1
+			}
+			if tmp%3 == 1 {
+				for ii := 0; ii < 3; ii++ {
+					if ng[ii]%3 == 1 {
+						c++
+					}
+				}
+				tmp = n - (i * 3) + 1
+			}
+			if tmp%3 == 2 {
+				for ii := 0; ii < 3; ii++ {
+					if ng[ii]%3 == 2 {
+						c++
+					}
+				}
+				tmp = n - (i * 3) + 1
 			}
 		}
 
-		if n%3 == 0 {
-			c := 0
-			for i := 2; i >= 0; i-- {
-				if ng[i]%3 == 0 {
-					c++
-				}
-				if c == 1 && ng[i]%3 == 1 {
-					fmt.Println("NO")
-					return
-				}
-			}
-		}
-
-		if n%3 == 1 {
-			c := 0
-			for i := 2; i >= 0; i-- {
-				if ng[i]%3 == 1 {
-					c++
-				}
-				if c == 1 && ng[i]%3 == 2 {
-					fmt.Println("NO")
-					return
-				}
-			}
-		}
-
-		if n%3 == 2 {
-			c := 0
-			for i := 2; i >= 0; i-- {
-				if ng[i]%3 == 2 {
-					c++
-				}
-				if c == 1 && ng[i]%3 == 0 {
-					fmt.Println("NO")
-					return
-				}
-			}
+		if c >= 3 {
+			fmt.Println("NO")
+			return
 		}
 	}
 
