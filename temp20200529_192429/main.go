@@ -17,33 +17,51 @@ func main() {
 	P := readi()
 	T := readString()
 
-	var r, s, p bool
+	var prevR, prevS, prevP bool
 	ans := 0
 	for i := 0; i < N; i++ {
 		switch string(T[i]) {
 		case "r":
-			if i >= K {
-				if string(T[i-K]) != "r" {
+			if i < K {
+				ans += P
+				continue
+			}
+
+			if string(T[i-K]) != "r" {
+				ans += P
+			} else {
+				if !prevR {
 					ans += P
 				}
-			} else {
-				ans += P
+				prevR = !prevR
 			}
 		case "s":
-			if i >= K {
-				if string(T[i-K]) != "s" {
+			if i < K {
+				ans += R
+				continue
+			}
+
+			if string(T[i-K]) != "s" {
+				ans += R
+			} else {
+				if !prevS {
 					ans += R
 				}
-			} else {
-				ans += R
+				prevS = !prevS
 			}
 		case "p":
-			if i >= K {
-				if string(T[i-K]) != "p" {
+			if i < K {
+				ans += S
+				continue
+			}
+
+			if string(T[i-K]) != "p" {
+				ans += S
+			} else {
+				if !prevP {
 					ans += S
 				}
-			} else {
-				ans += S
+				prevP = !prevP
 			}
 		}
 	}
