@@ -17,10 +17,12 @@ func main() {
 	P := readi()
 	T := readString()
 
+	var r, s, p int
 	ans := 0
 	for i := 0; i < N; i++ {
 		switch string(T[i]) {
 		case "r":
+			r++
 			if i < K {
 				ans += P
 				continue
@@ -31,11 +33,12 @@ func main() {
 				if i < 2*K {
 					continue
 				}
-				if string(T[i-2*K]) == "r" {
+				if r%2 != 0 {
 					ans += P
 				}
 			}
 		case "s":
+			s++
 			if i < K {
 				ans += R
 				continue
@@ -46,11 +49,12 @@ func main() {
 				if i < 2*K {
 					continue
 				}
-				if string(T[i-2*K]) == "s" {
+				if s%2 != 0 {
 					ans += R
 				}
 			}
 		case "p":
+			p++
 			if i < K {
 				ans += S
 				continue
@@ -61,7 +65,7 @@ func main() {
 				if i < 2*K {
 					continue
 				}
-				if string(T[i-2*K]) == "p" {
+				if p%2 != 0 {
 					ans += S
 				}
 			}
