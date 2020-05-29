@@ -30,9 +30,6 @@ func main() {
 			if string(T[i-K]) != "r" {
 				ans += P
 			} else {
-				if i < 2*K {
-					continue
-				}
 				if r%2 != 0 {
 					ans += P
 				}
@@ -46,9 +43,6 @@ func main() {
 			if string(T[i-K]) != "s" {
 				ans += R
 			} else {
-				if i < 2*K {
-					continue
-				}
 				if s%2 != 0 {
 					ans += R
 				}
@@ -62,9 +56,6 @@ func main() {
 			if string(T[i-K]) != "p" {
 				ans += S
 			} else {
-				if i < 2*K {
-					continue
-				}
 				if p%2 != 0 {
 					ans += S
 				}
