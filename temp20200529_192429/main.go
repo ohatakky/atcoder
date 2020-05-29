@@ -17,12 +17,14 @@ func main() {
 	P := readi()
 	T := readString()
 
-	var r, s, p int
+	r := make(map[int]bool)
+	s := make(map[int]bool)
+	p := make(map[int]bool)
 	ans := 0
 	for i := 0; i < N; i++ {
 		switch string(T[i]) {
 		case "r":
-			r++
+			r[i] = true
 			if i < K {
 				ans += P
 				continue
@@ -30,12 +32,14 @@ func main() {
 			if string(T[i-K]) != "r" {
 				ans += P
 			} else {
-				if r%2 != 0 {
+				if !r[i-K] {
 					ans += P
+				} else {
+					r[i] = false
 				}
 			}
 		case "s":
-			s++
+			s[i] = true
 			if i < K {
 				ans += R
 				continue
@@ -43,12 +47,14 @@ func main() {
 			if string(T[i-K]) != "s" {
 				ans += R
 			} else {
-				if s%2 != 0 {
+				if !s[i-K] {
 					ans += R
+				} else {
+					s[i] = false
 				}
 			}
 		case "p":
-			p++
+			p[i] = true
 			if i < K {
 				ans += S
 				continue
@@ -56,8 +62,10 @@ func main() {
 			if string(T[i-K]) != "p" {
 				ans += S
 			} else {
-				if p%2 != 0 {
+				if !p[i-K] {
 					ans += S
+				} else {
+					s[i] = false
 				}
 			}
 		}
