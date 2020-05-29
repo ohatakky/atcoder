@@ -65,7 +65,7 @@ func main() {
 				if !p[i-K] {
 					ans += S
 				} else {
-					s[i] = false
+					p[i] = false
 				}
 			}
 		}
