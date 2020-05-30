@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"io"
 	"os"
 	"sort"
@@ -10,7 +11,6 @@ import (
 
 func main() {
 	n := readi()
-	n = n
 	m := readi()
 	k := make([]int, m)
 	s := make([][]int, m)
@@ -26,14 +26,12 @@ func main() {
 		p[i] = readi()
 	}
 
-	for i := 0; i < m; i++ {
-		// TODO: k[i] == 3, s[i] == [1, 2, 5], p[i] == 1のとき、on/offの組み合わせは何通り？
-
-		// TODO: 電球が点灯するときの条件はonのスイッチの数が偶数or奇数
-		if p[i] == 0 {
-
-		} else {
-
+	// bit全探索
+	for b := 0; b < (1 << uint64(n)); b++ {
+		for i := 0; i < n; i++ {
+			if b>>uint(i)&1 == 1 {
+				fmt.Println(s[b][i])
+			}
 		}
 	}
 }
@@ -88,14 +86,24 @@ func lcm(a, b int) int {
 	return (a * b) / gcd(a, b)
 }
 
-func comb(n, k int) int {
-	if n < k {
-		return 0
+func permutation(n int, k int) int {
+	v := 1
+	if 0 < k && k <= n {
+		for i := 0; i < k; i++ {
+			v *= (n - i)
+		}
+	} else if k > n {
+		v = 0
 	}
-	if n < 0 || k < 0 {
-		return 0
-	}
-	return fac[n] * (finv[k] * finv[n-k] % MOD) % MOD
+	return v
+}
+
+func factorial(n int) int {
+	return permutation(n, n-1)
+}
+
+func combination(n int, k int) int {
+	return permutation(n, k) / factorial(k)
 }
 
 func permutations(arr []int) [][]int {
@@ -156,35 +164,14 @@ func divisor(n int) (res []int) {
 const (
 	INF = 1000000000000000000
 	MOD = 1e9 + 7
-
-	COMB_MAX = 510000
 )
 
 var (
 	readString func() string
 )
 
-var (
-	fac  = [COMB_MAX]int{}
-	finv = [COMB_MAX]int{}
-	inv  = [COMB_MAX]int{}
-)
-
 func init() {
 	readString = newReadString(os.Stdin)
-}
-
-func combInit() {
-	fac[0] = 1
-	fac[1] = 1
-	finv[0] = 1
-	finv[1] = 1
-	inv[1] = 1
-	for i := 2; i < COMB_MAX; i++ {
-		fac[i] = fac[i-1] * i % MOD
-		inv[i] = MOD - inv[MOD%i]*(MOD/i)%MOD
-		finv[i] = finv[i-1] * inv[i] % MOD
-	}
 }
 
 /*-------------------inputs-------------------*/

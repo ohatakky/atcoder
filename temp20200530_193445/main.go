@@ -15,12 +15,12 @@ func main() {
 	c := readi64()
 	d := readi64()
 
-	divC := (b / c) - (a / c)
-	divD := (b / d) - (a / d)
+	divC := (b / c) - ((a - 1) / c)
+	divD := (b / d) - ((a - 1) / d)
 	cd := lcm64(c, d)
-	divCD := (b / cd) - (a / cd)
+	divCD := (b / cd) - ((a - 1) / cd)
 
-	ans := (b - a) - (divC + divD - divCD)
+	ans := (b - (a - 1)) - (divC + divD - divCD)
 
 	fmt.Println(ans)
 }
