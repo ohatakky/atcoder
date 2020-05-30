@@ -25,7 +25,7 @@ func main() {
 		if a[i] <= b[i] {
 			ans = ans + a[i]
 			tmp := (b[i] - a[i])
-			if a[i]+1 <= tmp {
+			if a[i+1] <= tmp {
 				ans = ans + a[i+1]
 				a[i+1] = 0
 			} else {
