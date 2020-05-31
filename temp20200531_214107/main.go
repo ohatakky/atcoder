@@ -4,19 +4,47 @@ import (
 	"bufio"
 	"fmt"
 	"io"
-	"math"
 	"os"
 	"sort"
 	"strconv"
 )
 
 func main() {
-	a := readi64()
-	b := readf()
+	n := readi()
 
-	ab := float64(a) * b
-	trunc := math.Trunc(ab)
-	fmt.Println(int(trunc))
+	primes := primeFactors(n)
+	sort.Ints(primes)
+
+	agg := make(map[int]bool)
+	for i := 0; i < len(primes); i++ {
+		_, ok := agg[primes[i]]
+		if !ok {
+			agg[primes[i]] = true
+		} else {
+			if i < len(primes)-1 {
+				primes[i+1] = primes[i+1] * primes[i]
+			}
+		}
+	}
+	fmt.Println(len(agg))
+}
+
+func primeFactors(n int) []int {
+	factors := make([]int, 0)
+	i := 2
+	for i*i <= n {
+		r := n % i
+		if r != 0 {
+			i += 1
+		} else if r == 0 {
+			n /= i
+			factors = append(factors, i)
+		}
+	}
+	if n > 1 {
+		factors = append(factors, n)
+	}
+	return factors
 }
 
 /*-------------------utilities-------------------*/
