@@ -11,7 +11,6 @@ import (
 
 func main() {
 	n := readi()
-	n = n
 	q := readi()
 	s := readString()
 	l := make([]int, q)
@@ -21,14 +20,17 @@ func main() {
 		r[i] = readi()
 	}
 
-	for i := 0; i < q; i++ {
-		tmp := 0
-		for ii := l[i] - 1; ii < r[i]-1; ii++ {
-			if string(s[ii]) == "A" && string(s[ii+1]) == "C" {
-				tmp = tmp + 1
-			}
+	cnt := 0
+	ac := make(map[int]int)
+	for i := 0; i < n-1; i++ {
+		if string(s[i]) == "A" && string(s[i+1]) == "C" {
+			cnt++
 		}
-		fmt.Println(tmp)
+		ac[i+1] = cnt
+	}
+
+	for i := 0; i < q; i++ {
+		fmt.Println(ac[r[i]-1] - ac[l[i]-1])
 	}
 }
 
