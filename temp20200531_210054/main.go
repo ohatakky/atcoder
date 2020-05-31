@@ -11,17 +11,17 @@ import (
 
 func main() {
 	n := readi()
-	a := make([]uint64, n)
+	a := make([]int64, n)
 	for i := 0; i < n; i++ {
-		a[i] = readui64()
+		a[i] = readi64()
 	}
 
-	var ans uint64 = 1
+	var ans int64 = 1
 	for i := 0; i < n; i++ {
 		ans = ans * a[i]
 	}
 
-	var e1018 uint64 = 1000000000000000000
+	var e1018 int64 = 1000000000000000000
 	if ans > e1018 {
 		fmt.Println("-1")
 		return
