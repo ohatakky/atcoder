@@ -14,7 +14,7 @@ func main() {
 	R := readi()
 
 	ans := INF
-	for i := L; i <= L+2019; i++ {
+	for i := L; i < L+2019; i++ {
 		if i >= R {
 			break
 		}
