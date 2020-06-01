@@ -18,7 +18,15 @@ func main() {
 		if i >= R {
 			break
 		}
-		ans = min(ans, (i*(i+1))%2019)
+		for ii := R; ii >= R-2019; ii-- {
+			if ii <= L {
+				break
+			}
+			if i == ii {
+				continue
+			}
+			ans = min(ans, ((i * ii) % 2019))
+		}
 	}
 
 	fmt.Println(ans)
