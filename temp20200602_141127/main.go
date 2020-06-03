@@ -16,9 +16,12 @@ func main() {
 
 	ans := 0
 	for dN := 10; dN >= 1; dN-- {
-		tmp := (x - b*dN) / a
-		if a*tmp+b*d(tmp) <= x {
-			ans = max(ans, tmp)
+		tmpN := (x - b*dN) / a
+		if tmpN > 1000000000 {
+			tmpN = 1000000000
+		}
+		if a*tmpN+b*d(tmpN) <= x {
+			ans = max(ans, tmpN)
 		}
 	}
 
