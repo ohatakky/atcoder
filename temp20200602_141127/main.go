@@ -15,10 +15,10 @@ func main() {
 	x := readi()
 
 	ans := 0
-	for i := x; i >= 0; i-- {
-		if a*i+b*d(i) <= x {
-			ans = max(ans, i)
-			break
+	for dN := 10; dN >= 1; dN-- {
+		tmp := (x - b*dN) / a
+		if a*tmp+b*d(tmp) <= x {
+			ans = max(ans, tmp)
 		}
 	}
 
