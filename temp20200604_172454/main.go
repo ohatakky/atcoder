@@ -31,14 +31,15 @@ func main() {
 			}
 		}
 	}
+	fmt.Println(mapN)
 
 	ans := ""
-	for i := 1; i <= N; i++ {
+	for i := N; i >= 1; i-- {
 		n, ok := mapN[i]
 		if !ok {
-			ans = ans + "0"
+			ans = "0" + ans
 		} else {
-			ans = ans + strconv.Itoa(n)
+			ans = strconv.Itoa(n) + ans
 		}
 	}
 
