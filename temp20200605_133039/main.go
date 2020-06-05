@@ -18,15 +18,21 @@ func main() {
 	sort.Ints(a)
 
 	ans := a[0]
-	for i := 0; i < n; i++ {
+	i := 0
+	for {
+		if i == n {
+			break
+		}
 		tmp := a[i] % ans
 		if tmp != 0 {
 			if ans > tmp {
 				a[i] = tmp
 				ans = tmp
 				i = 0
+				continue
 			}
 		}
+		i++
 	}
 
 	fmt.Println(ans)
