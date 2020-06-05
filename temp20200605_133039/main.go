@@ -18,11 +18,7 @@ func main() {
 	sort.Ints(a)
 
 	ans := a[0]
-	i := 0
-	for {
-		if i == n-1 {
-			break
-		}
+	for i := 0; i < n; i++ {
 		tmp := a[i] % ans
 		if tmp != 0 {
 			if ans > tmp {
@@ -30,7 +26,6 @@ func main() {
 				i = 0
 			}
 		}
-		i++
 	}
 
 	fmt.Println(ans)
