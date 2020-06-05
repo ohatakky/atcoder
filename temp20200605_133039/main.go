@@ -22,6 +22,7 @@ func main() {
 		tmp := a[i] % ans
 		if tmp != 0 {
 			if ans > tmp {
+				a[i] = tmp
 				ans = tmp
 				i = 0
 			}
