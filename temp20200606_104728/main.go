@@ -20,14 +20,7 @@ func main() {
 
 	ans := abs(X - x[0])
 	for i := 1; i < N; i++ {
-		tmp := abs(x[i] - x[i-1])
-		if tmp < ans {
-			if ans%tmp == 0 {
-				ans = tmp
-			} else {
-				ans = 1
-			}
-		}
+		ans = gcd(ans, abs(x[i]-x[i-1]))
 	}
 
 	fmt.Println(ans)
