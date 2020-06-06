@@ -22,10 +22,12 @@ func main() {
 		}
 	}
 
-	// 7 3
-	// 2 1 3 4 5 6 7
 	prev := len(a[:idx])
-	back := len(a[idx+1:])
+	rest := 0
+	if prev != 0 {
+		rest = k - 1 - prev
+	}
+	back := len(a[idx+1:]) - rest
 	fmt.Println(int(math.Ceil(float64(prev)/float64(k-1)) + math.Ceil(float64(back)/float64(k-1))))
 }
 
