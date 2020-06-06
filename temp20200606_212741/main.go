@@ -14,21 +14,17 @@ func main() {
 	n := readi()
 	k := readi()
 	a := make([]int, n)
-	idx := 0
 	for i := 0; i < n; i++ {
 		a[i] = readi()
 		if a[i] == 1 {
-			idx = i
 		}
 	}
 
-	prev := len(a[:idx])
-	rest := 0
-	if prev != 0 {
-		rest = k - 1 - prev
+	if n == k {
+		fmt.Println(1)
+		return
 	}
-	back := len(a[idx+1:]) - rest
-	fmt.Println(int(math.Ceil(float64(prev)/float64(k-1)) + math.Ceil(float64(back)/float64(k-1))))
+	fmt.Println(1 + math.Ceil(float64(n-k)/float64(k-1)))
 }
 
 /*-------------------utilities-------------------*/
