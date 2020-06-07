@@ -23,14 +23,8 @@ func main() {
 	ans := INF
 	w := 0
 	e := 0
-	if string(s[0]) == "W" {
-		w++
-	} else {
-		e++
-	}
-	ans = min(ans, w+(eLen-e))
-	for i := 1; i < n; i++ {
-		if string(s[i]) == "W" {
+	for i := 1; i <= n; i++ {
+		if string(s[i-1]) == "W" {
 			w++
 		} else {
 			e++
