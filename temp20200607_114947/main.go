@@ -24,11 +24,12 @@ func main() {
 	w := 0
 	e := 0
 	for i := 0; i < n; i++ {
-		ans = min(ans, w+(eLen-e))
 		if string(s[i]) == "W" {
+			ans = min(ans, w+(eLen-e))
 			w++
 		} else {
 			e++
+			ans = min(ans, w+(eLen-e))
 		}
 	}
 
