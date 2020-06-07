@@ -23,13 +23,13 @@ func main() {
 	ans := INF
 	w := 0
 	e := 0
-	for i := 1; i <= n; i++ {
-		if string(s[i-1]) == "W" {
+	for i := 0; i < n; i++ {
+		ans = min(ans, w+(eLen-e))
+		if string(s[i]) == "W" {
 			w++
 		} else {
 			e++
 		}
-		ans = min(ans, w+(eLen-e))
 	}
 
 	fmt.Println(ans)
