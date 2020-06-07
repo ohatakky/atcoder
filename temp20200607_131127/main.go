@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	n := readi() // 偶数
+	n := readi()
 	x := make([]int, n)
 	for i := 0; i < n; i++ {
 		x[i] = readi()
@@ -20,17 +20,12 @@ func main() {
 	sort.Ints(cpx)
 
 	l := n - 1
-	median := (l + 1) / 2
+	mediun := (l + 1) / 2
 	for i := 0; i < n; i++ {
-		if cpx[median] == x[i] {
-			for ii := median; ii >= 0; ii-- {
-				if cpx[ii] != x[i] {
-					fmt.Println(cpx[ii])
-					break
-				}
-			}
+		if cpx[mediun] == x[i] {
+			fmt.Println(cpx[len(cpx)-mediun-1])
 		} else {
-			fmt.Println(cpx[median])
+			fmt.Println(cpx[len(cpx)-mediun])
 		}
 	}
 }
