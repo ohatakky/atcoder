@@ -16,14 +16,18 @@ func main() {
 		x[i] = readi()
 	}
 
+	tmp := make([]int, n)
+	copy(tmp, x)
+	sort.Ints(tmp)
+
 	l := n - 1
 	median := (l + 1) / 2
 	for i := 0; i < n; i++ {
-		tmp := make([]int, n)
-		copy(tmp, x)
-		tmp = append(tmp[:i], tmp[i+1:]...)
-		sort.Ints(tmp)
-		fmt.Println(tmp[median-1])
+		if tmp[median] == x[i] {
+			fmt.Println(tmp[median-1])
+		} else {
+			fmt.Println(tmp[median])
+		}
 	}
 }
 
