@@ -16,23 +16,14 @@ func main() {
 		x[i] = readi()
 	}
 
-	cpx := make([]int, n)
-	copy(cpx, x)
-	sort.Ints(cpx)
-
-	cpxMap := make(map[int]int)
-	for i := 0; i < n; i++ {
-		cpxMap[cpx[i]] = i
-	}
-
 	l := n - 1
-	mediun := (l + 1) / 2
+	median := (l + 1) / 2
 	for i := 0; i < n; i++ {
-		idx := cpxMap[x[i]]
-		cpcpx := make([]int, n)
-		copy(cpcpx, cpx)
-		tmp := append(cpcpx[:idx], cpcpx[idx+1:]...)
-		fmt.Println(tmp[len(tmp)-mediun])
+		tmp := make([]int, n)
+		copy(tmp, x)
+		tmp = append(tmp[:i], tmp[i+1:]...)
+		sort.Ints(tmp)
+		fmt.Println(tmp[median-1])
 	}
 }
 
