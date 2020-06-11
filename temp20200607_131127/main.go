@@ -23,7 +23,7 @@ func main() {
 	l := n - 1
 	median := (l + 1) / 2
 	for i := 0; i < n; i++ {
-		if tmp[median] == x[i] {
+		if x[i] >= tmp[median] {
 			fmt.Println(tmp[median-1])
 		} else {
 			fmt.Println(tmp[median])
