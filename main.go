@@ -115,6 +115,25 @@ func divisor(n int) (res []int) {
 	return
 }
 
+// func searchInts(a []int, k int) int {
+// 	return binarySearch(len(a), func(i int) bool {
+// 		return a[i] >= k
+// 	})
+// }
+
+func binarySearch(n int, f func(int) bool) int {
+	i, j := 0, n
+	for i < j {
+		h := int(uint(i+j) >> 1)
+		if !f(h) {
+			i = h + 1
+		} else {
+			j = h
+		}
+	}
+	return i
+}
+
 /*-------------------init-------------------*/
 
 const (
