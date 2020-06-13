@@ -7,8 +7,6 @@ import (
 	"os"
 	"sort"
 	"strconv"
-
-	"github.com/fatih/color"
 )
 
 func main() {
@@ -25,16 +23,12 @@ func main() {
 		agg[i] = agg[i-1] + a[i-1]
 	}
 
-	fmt.Println(agg)
-
 	ans := 0
 	for i := 1; i <= n; i++ {
 		idx := searchInts(agg, k+agg[i-1])
 		if idx >= len(agg) {
 			continue
 		}
-		color.Yellow("%d", i)
-		color.Blue("%d", idx)
 		ans = ans + (len(agg) - idx)
 	}
 
