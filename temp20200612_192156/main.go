@@ -17,21 +17,24 @@ func main() {
 		a[i] = readi()
 	}
 
-	agg := make([]int, n)
-	agg[0] = a[0]
-	for i := 1; i < n; i++ {
-		agg[i] = agg[i-1] + a[i]
+	agg := make([]int, n+1)
+	agg[0] = 0
+	for i := 1; i <= n; i++ {
+		agg[i] = agg[i-1] + a[i-1]
 	}
 
 	fmt.Println(agg)
+	for i := 0; i < n; i++ {
+
+	}
 
 	fmt.Println(searchInts(agg, k))
 }
 
-func searchInts(a []int, x int) int {
+func searchInts(a []int, k int) int {
 	return binarySearch(len(a), func(i int) bool {
 		// kより大きい境界
-		return a[i] >= x && a[i-1] < x
+		return a[i] >= k && a[i-1] < k
 	})
 }
 
