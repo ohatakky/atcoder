@@ -7,6 +7,8 @@ import (
 	"os"
 	"sort"
 	"strconv"
+
+	"github.com/fatih/color"
 )
 
 func main() {
@@ -24,17 +26,24 @@ func main() {
 	}
 
 	fmt.Println(agg)
-	for i := 0; i < n; i++ {
 
+	ans := 0
+	for i := 1; i <= n; i++ {
+		idx := searchInts(agg, k+agg[i-1])
+		if idx >= len(agg) {
+			continue
+		}
+		color.Yellow("%d", i)
+		color.Blue("%d", idx)
+		ans = ans + (len(agg) - idx)
 	}
 
-	fmt.Println(searchInts(agg, k))
+	fmt.Println(ans)
 }
 
 func searchInts(a []int, k int) int {
 	return binarySearch(len(a), func(i int) bool {
-		// kより大きい境界
-		return a[i] >= k && a[i-1] < k
+		return a[i] >= k
 	})
 }
 
