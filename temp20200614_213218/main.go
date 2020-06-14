@@ -18,31 +18,33 @@ func main() {
 	sort.Ints(a)
 
 	ans := 0
-	if a[0] != a[1] {
-		ans++
-	}
-	for i := 1; i < n; i++ {
-		var tmp bool
-		for ii := i - 1; ii >= 0; ii-- {
-			if a[ii] == a[i] {
-				tmp = true
-				break
-			}
-			if a[i]%a[ii] == 0 {
-				tmp = true
-				break
-			}
-			if a[ii] == a[ii+1] {
-				tmp = true
-				break
-			}
-		}
-		if !tmp {
+	for i := 0; i < n; i++ {
+		idx := searchInts(a, a[i])
+		if idx >= len(a) {
 			ans++
 		}
 	}
 
 	fmt.Println(ans)
+}
+
+func searchInts(a []int, k int) int {
+	return binarySearch(len(a), func(i int) bool {
+		return k%a[i] == 0
+	})
+}
+
+func binarySearch(n int, f func(int) bool) int {
+	i, j := 0, n
+	for i < j {
+		h := int(uint(i+j) >> 1)
+		if !f(h) {
+			i = h + 1
+		} else {
+			j = h
+		}
+	}
+	return i
 }
 
 /*-------------------utilities-------------------*/
@@ -146,25 +148,6 @@ func divisor(n int) (res []int) {
 	}
 	sort.Ints(res)
 	return
-}
-
-// func searchInts(a []int, k int) int {
-// 	return binarySearch(len(a), func(i int) bool {
-// 		return a[i] >= k
-// 	})
-// }
-
-func binarySearch(n int, f func(int) bool) int {
-	i, j := 0, n
-	for i < j {
-		h := int(uint(i+j) >> 1)
-		if !f(h) {
-			i = h + 1
-		} else {
-			j = h
-		}
-	}
-	return i
 }
 
 /*-------------------init-------------------*/
