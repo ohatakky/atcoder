@@ -22,7 +22,19 @@ func main() {
 			tmp = tmp + list[v]
 		}
 		if tmp == y && !ok {
-			fmt.Println(xs)
+			var x, y, z int
+			for _, v := range xs {
+				if v == 1 {
+					x++
+				}
+				if v == 2 {
+					y++
+				}
+				if v == 3 {
+					z++
+				}
+			}
+			fmt.Printf("%d %d %d\n", x, y, z)
 			ok = true
 		}
 	}, 3, n)
