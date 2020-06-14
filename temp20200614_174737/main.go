@@ -9,57 +9,44 @@ import (
 	"strconv"
 )
 
+var (
+	n, y       int
+	otoshidama = [3]int{10000, 5000, 1000}
+)
+
 func main() {
-	n := readi()
-	y := readi()
+	n = readi()
+	y = readi()
 
-	list := [4]int{0, 10000, 5000, 1000}
-
-	var ok bool
-	repeatComb(func(xs []int) {
-		tmp := 0
-		for _, v := range xs {
-			tmp = tmp + list[v]
-		}
-		if tmp == y && !ok {
-			var x, y, z int
-			for _, v := range xs {
-				if v == 1 {
-					x++
-				}
-				if v == 2 {
-					y++
-				}
-				if v == 3 {
-					z++
-				}
-			}
-			fmt.Printf("%d %d %d\n", x, y, z)
-			ok = true
-		}
-	}, 3, n)
-
-	if !ok {
+	if !dfs(0, 0, 0, 0, 0) {
 		fmt.Println("-1 -1 -1")
 	}
 }
 
-func repeatCombSub(f func([]int), n, m int, xs []int) {
-	if m == 0 {
-		f(xs)
-	} else if n == 1 {
-		for i := 0; i < m; i++ {
-			xs = append(xs, 1)
-		}
-		f(xs)
-	} else {
-		repeatCombSub(f, n-1, m, xs)
-		repeatCombSub(f, n, m-1, append(xs, n))
+func dfs(depth, sum, x, y, z int) bool {
+	if depth > n {
+		return false
 	}
-}
+	if depth == n && sum == y {
+		fmt.Printf("%d %d %d\n", x, y, z)
+		return true
+	}
 
-func repeatComb(f func([]int), n, m int) {
-	repeatCombSub(f, n, m, make([]int, 0, m))
+	for i := 0; i <= 2; i++ {
+		switch i {
+		case 0:
+			x++
+		case 1:
+			y++
+		case 2:
+			z++
+		}
+		if dfs(depth+1, sum+otoshidama[i], x, y, z) {
+			return true
+		}
+	}
+
+	return false
 }
 
 /*-------------------utilities-------------------*/
