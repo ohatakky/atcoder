@@ -15,19 +15,21 @@ func main() {
 
 	list := [4]int{0, 10000, 5000, 1000}
 
-	p := func(xs []int) {
+	var ok bool
+	repeatComb(func(xs []int) {
 		tmp := 0
 		for _, v := range xs {
 			tmp = tmp + list[v]
 		}
-		if tmp == y {
+		if tmp == y && !ok {
 			fmt.Println(xs)
-			// return
+			ok = true
 		}
-	}
-	repeatComb(p, 3, n)
+	}, 3, n)
 
-	fmt.Println("-1 -1 -1")
+	if !ok {
+		fmt.Println("-1 -1 -1")
+	}
 }
 
 func repeatCombSub(f func([]int), n, m int, xs []int) {
