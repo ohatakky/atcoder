@@ -35,8 +35,8 @@ func main() {
 			if bit == 1 {
 				for k := 0; k < m; k++ {
 					for l := 0; l < K[k]; l++ {
-						if sIdx == l {
-							tmpP[S[k][l]-1] = tmpP[S[k][l]-1] + 1
+						if sIdx == S[k][l]-1 {
+							tmpP[k] = tmpP[k] + 1
 						}
 					}
 				}
