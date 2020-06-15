@@ -12,12 +12,12 @@ import (
 func main() {
 	n := readi()
 	m := readi()
-	k := make([]int, m)
+	K := make([]int, m)
 	S := make([][]int, m)
 	for i := 0; i < m; i++ {
-		k[i] = readi()
-		S[i] = make([]int, k[i])
-		for ii := 0; ii < k[i]; ii++ {
+		K[i] = readi()
+		S[i] = make([]int, K[i])
+		for ii := 0; ii < K[i]; ii++ {
 			S[i][ii] = readi()
 		}
 	}
@@ -26,35 +26,27 @@ func main() {
 		P[i] = readi()
 	}
 
-	// map[電球]スイッチの個数
-	mapS := make(map[int]int)
-	for i := 0; i < m; i++ {
-		for ii := 0; ii < k[i]; ii++ {
-			mapS[S[i][ii]-1] = mapS[S[i][ii]-1] + 1
-		}
-	}
-
-	// 電球が光る条件
-	mapP := make(map[int]bool)
-	for i := 0; i < m; i++ {
-		mapP[i] = mapS[i]%2 == P[i]
-	}
-
 	ans := 0
 	for i := 0; i < (1 << uint(n)); i++ {
 		sIdx := 0
-		tmpS := make(map[int]int)
+		tmpP := make(map[int]int)
 		for j := 0; j < n; j++ {
 			bit := i >> uint(j) & 1
 			if bit == 1 {
-				tmpS[sIdx] = tmpS[sIdx] + 1
+				for k := 0; k < m; k++ {
+					for l := 0; l < K[k]; l++ {
+						if sIdx == l {
+							tmpP[S[k][l]-1] = tmpP[S[k][l]-1] + 1
+						}
+					}
+				}
 			}
 			sIdx++
 		}
 
 		tmp := true
 		for i := 0; i < m; i++ {
-			if mapP[i] != (tmpS[i]%2 == 0) {
+			if tmpP[i]%2 != P[i] {
 				tmp = false
 			}
 		}
