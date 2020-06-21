@@ -30,12 +30,15 @@ func main() {
 	ans := 0
 	for i := 0; i < (1 << uint(q)); i++ {
 		tmp := 0
+		ok := true
 		for j := 0; j < q; j++ {
 			if i>>uint(j)&1 == 1 {
 				tmp = tmp + d[j]
 			}
 		}
-		ans = max(ans, tmp)
+		if ok {
+			ans = max(ans, tmp)
+		}
 	}
 
 	fmt.Println(ans)
