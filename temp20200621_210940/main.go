@@ -10,24 +10,15 @@ import (
 )
 
 func main() {
-	n := readui64()
-	s := strconv.FormatUint(n, 26)
+	n := readi64() - 1
 
-	fmt.Println(s)
-
-	ans := ""
-	alp := "abcdefghijklmnopqrstuvwxy"
-	for i := 0; i < len(s); i++ {
-		idx, _ := strconv.ParseUint(string(s[i]), 26, 0)
-		if idx == 0 && string(s[i-1]) == "1" {
-			ans = ans[:len(ans)-1]
-			ans = ans + "z"
-		} else {
-			ans = ans + string(alp[idx-1])
-		}
+	str := ""
+	for n >= 0 {
+		flagment := n % 26
+		n = n/26 - 1
+		str = string('a'+flagment) + str
 	}
-
-	fmt.Println(ans)
+	fmt.Println(str)
 }
 
 /*-------------------utilities-------------------*/
