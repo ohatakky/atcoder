@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"io"
 	"os"
 	"sort"
@@ -11,8 +12,12 @@ import (
 func main() {
 	n := readi()
 	a := make([]int, n)
+	cntA := make(map[int]int)
+	sum := 0
 	for i := 0; i < n; i++ {
 		a[i] = readi()
+		cntA[a[i]]++
+		sum += a[i]
 	}
 	q := readi()
 	b := make([]int, q)
@@ -21,14 +26,17 @@ func main() {
 		b[i] = readi()
 		c[i] = readi()
 	}
-	sort.Ints(a)
 
-}
-
-func searchInts(a []int, k int) int {
-	return binarySearch(len(a), func(i int) bool {
-		return a[i] >= k
-	})
+	ans := sum
+	for i := 0; i < q; i++ {
+		cntB, ok := cntA[b[i]]
+		if ok {
+			cntA[b[i]] = 0
+			cntA[c[i]] += cntB
+		}
+		ans = ans - (cntB * b[i]) + (cntB * c[i])
+		fmt.Println(ans)
+	}
 }
 
 /*-------------------utilities-------------------*/
