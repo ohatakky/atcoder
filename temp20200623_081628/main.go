@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"io"
 	"os"
 	"sort"
@@ -9,7 +10,47 @@ import (
 )
 
 func main() {
+	n := readi()
 
+	p := primeFactors(n)
+	agg := make(map[int]int)
+	for i := 0; i < len(p); i++ {
+		agg[p[i]]++
+	}
+
+	ans := 0
+	for _, a := range agg {
+		i := 0
+		sum := 0
+		for {
+			sum = sum + i
+			if sum > a {
+				i = i - 1
+				break
+			}
+			i++
+		}
+		ans += i
+	}
+	fmt.Println(ans)
+}
+
+func primeFactors(n int) []int {
+	factors := make([]int, 0)
+	i := 2
+	for i*i <= n {
+		r := n % i
+		if r != 0 {
+			i++
+		} else if r == 0 {
+			n /= i
+			factors = append(factors, i)
+		}
+	}
+	if n > 1 {
+		factors = append(factors, n)
+	}
+	return factors
 }
 
 /*-------------------utilities-------------------*/
@@ -100,24 +141,6 @@ func isPrime(n int) bool {
 		}
 	}
 	return true
-}
-
-func primeFactors(n int) []int {
-	factors := make([]int, 0)
-	i := 2
-	for i*i <= n {
-		r := n % i
-		if r != 0 {
-			i++
-		} else if r == 0 {
-			n /= i
-			factors = append(factors, i)
-		}
-	}
-	if n > 1 {
-		factors = append(factors, n)
-	}
-	return factors
 }
 
 func divisor(n int) (res []int) {
