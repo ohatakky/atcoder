@@ -15,16 +15,20 @@ func main() {
 	a := make([]int64, n)
 	for i := 0; i < n; i++ {
 		a[i] = readi64()
+		if a[i] == 0 {
+			fmt.Println(0)
+			return
+		}
 	}
 
-	var e18 int64 = 1000000000000000000
+	upper := big.NewInt(1e18)
 	ans := big.NewInt(1)
 	for i := 0; i < n; i++ {
 		ans.Mul(ans, big.NewInt(a[i]))
-	}
-	if ans.Cmp(big.NewInt(e18)) == 1 {
-		fmt.Println(-1)
-		return
+		if ans.Cmp(upper) == 1 {
+			fmt.Println(-1)
+			return
+		}
 	}
 	fmt.Println(ans)
 }
