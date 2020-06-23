@@ -152,6 +152,26 @@ func binarySearch(n int, f func(int) bool) int {
 	return i
 }
 
+type Queue struct {
+	items []int
+}
+
+func (q *Queue) push(item int) {
+	q.items = append(q.items, item)
+}
+
+func (q *Queue) pop() {
+	q.items = q.items[1:]
+}
+
+func (q *Queue) front() int {
+	return q.items[0]
+}
+
+func (q *Queue) size() int {
+	return len(q.items)
+}
+
 /*-------------------init-------------------*/
 
 const (
