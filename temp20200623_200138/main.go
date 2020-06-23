@@ -10,23 +10,23 @@ import (
 )
 
 type Queue struct {
-	Items []int
+	items []int
 }
 
 func (q *Queue) push(item int) {
-	q.Items = append(q.Items, item)
+	q.items = append(q.items, item)
 }
 
 func (q *Queue) pop() {
-	q.Items = q.Items[1:]
+	q.items = q.items[1:]
 }
 
 func (q *Queue) front() int {
-	return q.Items[0]
+	return q.items[0]
 }
 
 func (q *Queue) size() int {
-	return len(q.Items)
+	return len(q.items)
 }
 
 func main() {
