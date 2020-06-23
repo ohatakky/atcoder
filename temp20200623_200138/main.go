@@ -64,11 +64,19 @@ func main() {
 			if dist[d] != -1 {
 				continue
 			}
-			dist[d] = dist[v] + 1
+			dist[d] = v
 			queue.push(d)
 		}
 	}
 
+	for i := 2; i <= n; i++ {
+		if dist[i] == -1 {
+			fmt.Println("No")
+			return
+		}
+	}
+
+	fmt.Println("Yes")
 	for i := 2; i <= n; i++ {
 		fmt.Println(dist[i])
 	}
