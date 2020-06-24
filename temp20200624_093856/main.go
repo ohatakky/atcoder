@@ -10,9 +10,11 @@ import (
 )
 
 var (
-	k    int
-	a    []int
-	mapA map[int]int
+	k       int
+	a       []int
+	mapA    map[int]int
+	visited []bool
+	order   []int
 )
 
 func main() {
@@ -27,8 +29,8 @@ func main() {
 		mapA[i+1] = a[i]
 	}
 
-	fmt.Println(mapA)
-
+	visited = make([]bool, n+1)
+	order = make([]int, 0)
 	dfs(0, 1)
 }
 
@@ -37,6 +39,26 @@ func dfs(depth, p int) {
 		fmt.Println(p)
 		return
 	}
+
+	if visited[p] {
+		for i, v := range order {
+			if v == p {
+				repeats := order[i:]
+				repeatNum := len(repeats)
+				if repeatNum == 1 {
+					fmt.Println(repeats[0])
+					return
+				}
+				tmp := (k - depth) % repeatNum
+				fmt.Println(repeats[tmp])
+				return
+			}
+		}
+		return
+	}
+
+	visited[p] = true
+	order = append(order, p)
 	dfs(depth+1, mapA[p])
 }
 

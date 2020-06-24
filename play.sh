@@ -8,4 +8,10 @@ function playatcoder() {
   code .
 }
 
+function ac() {
+  dir=$GOPATH/src/github.com/ohatakky/playgo/atcoder/
+  file=$(ls $dir | tail -n 1)
+  code $dir$file
+}
+
 playatcoder
