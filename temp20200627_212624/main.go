@@ -14,53 +14,44 @@ func main() {
 	n := readi()
 	m := readi()
 	k := readi()
-	a := new(Queue)
-	b := new(Queue)
+	a := make([]int, n)
 	for i := 0; i < n; i++ {
-		a.push(readi())
+		a[i] = readi()
 	}
+	b := make([]int, m)
 	for i := 0; i < m; i++ {
-		b.push(readi())
+		b[i] = readi()
 	}
 
-	var i int
-	tmp := make([]int, 0)
+	// i を読んだ本の数として
+	ans := 0
+	i := 0
 	for {
-		if a.size() > 0 && b.size() > 0 {
-			af := a.front()
-			tmp = append(tmp, af)
-			a.pop()
-			bf := b.front()
-			tmp = append(tmp, bf)
-			b.pop()
-		} else if a.size() > 0 {
-			af := a.front()
-			tmp = append(tmp, af)
-			a.pop()
-		} else if b.size() > 0 {
-			bf := b.front()
-			tmp = append(tmp, bf)
-			b.pop()
+		tmp := make([]int, 0)
+		if i >= n {
+			tmp = append(tmp, a...)
+			tmp = append(tmp, b[:i+1]...)
+		} else if i >= m {
+			tmp = append(tmp, b...)
+			tmp = append(tmp, a[:i+1]...)
+		} else {
+			tmp = append(tmp, a[:i+1]...)
+			tmp = append(tmp, b[:i+1]...)
 		}
 		sort.Ints(tmp)
-
+		fmt.Println(tmp)
 		sum := 0
 		for j := 0; j <= i; j++ {
-			if i >= n+m {
-				break
-			}
 			sum += tmp[j]
 		}
-		if sum > k {
-			break
-		}
-		if i == n+m {
+		if sum >= k {
 			break
 		}
 		i++
+		ans++
 	}
 
-	fmt.Println(i)
+	fmt.Println(ans)
 }
 
 /*-------------------utilities-------------------*/
@@ -221,16 +212,10 @@ func (q *Queue) push(item int) {
 }
 
 func (q *Queue) pop() {
-	if q.size() == 0 {
-		return
-	}
 	q.items = q.items[1:]
 }
 
 func (q *Queue) front() int {
-	if q.size() == 0 {
-		return 0
-	}
 	return q.items[0]
 }
 
