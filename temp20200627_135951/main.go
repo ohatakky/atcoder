@@ -12,50 +12,39 @@ import (
 
 const (
 	T1 = "1"
-	T2 = "2"
 	F1 = "1"
-	F2 = "2"
 )
 
 func main() {
 	s := readString()
-	Q := readi()
-	q := make([][]string, Q)
-	cnt := 0
-	cntT1 := make(map[int]int)
-	for i := 0; i < Q; i++ {
-		q[i] = make([]string, 3)
-		q[i][0] = readString()
-		if q[i][0] == T2 {
-			q[i][1] = readString()
-			q[i][2] = readString()
+	q := readi()
+	var reversed bool
+	var front, back string
+	for i := 0; i < q; i++ {
+		if readString() == T1 {
+			reversed = !reversed
 		} else {
-			cnt++
-		}
-		cntT1[i] = cnt
-	}
-
-	for i := 0; i < Q; i++ {
-		if q[i][0] == T2 {
-			if cntT1[i]%2 != 0 {
-				if q[i][1] == F1 {
-					s = s + q[i][2]
+			f := readString()
+			c := readString()
+			if reversed {
+				if f == F1 {
+					back = back + c
 				} else {
-					s = q[i][2] + s
+					front = c + front
 				}
 			} else {
-				if q[i][1] == F1 {
-					s = q[i][2] + s
+				if f == F1 {
+					front = c + front
 				} else {
-					s = s + q[i][2]
+					back = back + c
 				}
 			}
 		}
 	}
 
-	ans := s
-	if cnt%2 != 0 {
-		ans = reverse(s)
+	ans := front + s + back
+	if reversed {
+		ans = reverse(ans)
 	}
 
 	fmt.Println(ans)

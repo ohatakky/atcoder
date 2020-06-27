@@ -6,6 +6,7 @@ import (
 	"os"
 	"sort"
 	"strconv"
+	"strings"
 )
 
 func main() {
@@ -35,21 +36,21 @@ func max(x, y int) int {
 	return y
 }
 
-func chmin(x *int, y int) bool {
-	if *x > y {
-		*x = y
-		return true
-	}
-	return false
-}
+// func chmin(x *int, y int) bool {
+// 	if *x > y {
+// 		*x = y
+// 		return true
+// 	}
+// 	return false
+// }
 
-func chmax(x *int, y int) bool {
-	if *x < y {
-		*x = y
-		return true
-	}
-	return false
-}
+// func chmax(x *int, y int) bool {
+// 	if *x < y {
+// 		*x = y
+// 		return true
+// 	}
+// 	return false
+// }
 
 func gcd(a, b int) int {
 	if b == 0 {
@@ -133,11 +134,11 @@ func divisor(n int) (res []int) {
 	return
 }
 
-// func searchInts(a []int, k int) int {
-// 	return binarySearch(len(a), func(i int) bool {
-// 		return a[i] >= k
-// 	})
-// }
+func searchInts(a []int, k int) int {
+	return binarySearch(len(a), func(i int) bool {
+		return a[i] >= k
+	})
+}
 
 func binarySearch(n int, f func(int) bool) int {
 	i, j := 0, n
@@ -150,6 +151,15 @@ func binarySearch(n int, f func(int) bool) int {
 		}
 	}
 	return i
+}
+
+func reverseStr(s string) string {
+	var b strings.Builder
+	b.Grow(len(s))
+	for i := len(s) - 1; i >= 0; i-- {
+		b.WriteByte(s[i])
+	}
+	return b.String()
 }
 
 type Queue struct {
