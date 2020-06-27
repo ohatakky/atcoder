@@ -7,6 +7,7 @@ import (
 	"os"
 	"sort"
 	"strconv"
+	"strings"
 )
 
 const (
@@ -20,41 +21,53 @@ func main() {
 	s := readString()
 	Q := readi()
 	q := make([][]string, Q)
+	cnt := 0
+	cntT1 := make(map[int]int)
 	for i := 0; i < Q; i++ {
 		q[i] = make([]string, 3)
 		q[i][0] = readString()
 		if q[i][0] == T2 {
 			q[i][1] = readString()
 			q[i][2] = readString()
+		} else {
+			cnt++
 		}
+		cntT1[i] = cnt
 	}
 
 	for i := 0; i < Q; i++ {
-		if q[i][0] == T1 {
-			s = reverse((s))
-		} else {
-			if q[i][1] == F1 {
-				s = q[i][2] + s
+		if q[i][0] == T2 {
+			if cntT1[i]%2 != 0 {
+				if q[i][1] == F1 {
+					s = s + q[i][2]
+				} else {
+					s = q[i][2] + s
+				}
 			} else {
-				s = s + q[i][2]
+				if q[i][1] == F1 {
+					s = q[i][2] + s
+				} else {
+					s = s + q[i][2]
+				}
 			}
 		}
 	}
 
-	fmt.Println(s)
+	ans := s
+	if cnt%2 != 0 {
+		ans = reverse(s)
+	}
+
+	fmt.Println(ans)
 }
 
 func reverse(s string) string {
-	rns := []rune(s) // convert to rune
-	for i, j := 0, len(rns)-1; i < j; i, j = i+1, j-1 {
-
-		// swap the letters of the string,
-		// like first with last and so on.
-		rns[i], rns[j] = rns[j], rns[i]
+	var b strings.Builder
+	b.Grow(len(s))
+	for i := len(s) - 1; i >= 0; i-- {
+		b.WriteByte(s[i])
 	}
-
-	// return the reversed string.
-	return string(rns)
+	return b.String()
 }
 
 /*-------------------utilities-------------------*/
