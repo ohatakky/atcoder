@@ -4,36 +4,30 @@ import (
 	"bufio"
 	"fmt"
 	"io"
+	"math"
 	"os"
 	"sort"
 	"strconv"
-
-	"math"
-
-	"github.com/guptarohit/asciigraph"
 )
 
 func main() {
 	a := readi()
 	b := readi()
-	n := readi() // <= 10^12
-
-	data := make([]float64, 0)
+	n := readi()
 
 	ans := 0.0
-	for i := 0; i <= n; i++ {
+	for i := n; i >= 0; i-- {
 		tmp1 := math.Floor(float64((a * i) / b))
 		tmp2 := float64(a) * math.Floor(float64(i/b))
 		tmp := tmp1 - tmp2
-		data = append(data, tmp)
 		if ans < tmp {
 			ans = tmp
 		}
+		if i == n-a {
+			break
+		}
 	}
 	fmt.Println(ans)
-
-	graph := asciigraph.Plot(data, asciigraph.Width(n), asciigraph.Height(n))
-	fmt.Println(graph)
 }
 
 /*-------------------utilities-------------------*/
