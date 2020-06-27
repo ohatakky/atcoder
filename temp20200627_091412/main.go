@@ -17,9 +17,7 @@ func main() {
 
 	ans := 0.0
 	for i := n; i >= 0; i-- {
-		tmp1 := math.Floor(float64((a * i) / b))
-		tmp2 := float64(a) * math.Floor(float64(i/b))
-		tmp := tmp1 - tmp2
+		tmp := math.Floor(float64((a*i)/b)) - float64(a)*math.Floor(float64(i/b))
 		if ans < tmp {
 			ans = tmp
 		}
