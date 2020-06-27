@@ -15,16 +15,22 @@ func main() {
 	b := readi()
 	n := readi()
 
-	ans := 0.0
-	for i := n; i >= 0; i-- {
-		tmp := math.Floor(float64((a*i)/b)) - float64(a)*math.Floor(float64(i/b))
-		if ans < tmp {
-			ans = tmp
-		}
-		if i == n-a {
-			break
-		}
-	}
+	// ans := 0.0
+	// data := make([]float64, 0)
+	// for i := 0; i <= n; i++ {
+	// 	tmp := math.Floor(float64((a*i)/b)) - float64(a)*math.Floor(float64(i/b))
+	// 	data = append(data, tmp)
+	// 	if ans < tmp {
+	// 		ans = tmp
+	// 	}
+	// }
+	// graph := asciigraph.Plot(data, asciigraph.Height(10))
+	// fmt.Println(graph)
+
+	// fmt.Println(ans)
+
+	x := min(b-1, n)
+	ans := math.Floor(float64((a*x)/b)) - float64(a)*math.Floor(float64(x/b))
 	fmt.Println(ans)
 }
 
