@@ -13,21 +13,6 @@ import (
 	"github.com/guptarohit/asciigraph"
 )
 
-type xy struct {
-	x []float64
-	y []float64
-}
-
-func (d xy) Len() int {
-	return len(d.x)
-}
-
-func (d xy) XY(i int) (x, y float64) {
-	x = d.x[i]
-	y = d.y[i]
-	return
-}
-
 func main() {
 	a := readi()
 	b := readi()
