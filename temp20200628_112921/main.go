@@ -18,11 +18,13 @@ func main() {
 		p[i] = readi()
 	}
 
-	k = k
-
 	ans := 0.0
-	for i := 0; i < n; i++ {
-		ans += expectedValue(p[i])
+	for i := 0; i <= n-k; i++ {
+		tmp := 0.0
+		for j := i; j < i+k; j++ {
+			tmp += expectedValue(p[j])
+		}
+		ans = max64(ans, tmp)
 	}
 
 	fmt.Printf("%f\n", ans)
@@ -34,6 +36,13 @@ func expectedValue(p int) float64 {
 		res += float64(i) * (1 / float64(p))
 	}
 	return res
+}
+
+func max64(x, y float64) float64 {
+	if x > y {
+		return x
+	}
+	return y
 }
 
 /*-------------------utilities-------------------*/
