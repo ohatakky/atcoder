@@ -18,13 +18,25 @@ func main() {
 		p[i] = readi()
 	}
 
-	ans := 0.0
-	for i := 0; i <= n-k; i++ {
-		tmp := 0.0
-		for j := i; j < i+k; j++ {
-			tmp += expectedValue(p[j])
+	mapSum := make(map[int]int)
+	mapSum[0] = p[0]
+	for i := 1; i < n; i++ {
+		mapSum[i] = p[i] + mapSum[i-1]
+	}
+
+	maxIdx := 0
+	maxSum := 0
+	for i := k - 1; i < n; i++ {
+		tmp := mapSum[i] - mapSum[i-k]
+		if maxSum < tmp {
+			maxSum = tmp
+			maxIdx = i
 		}
-		ans = max64(ans, tmp)
+	}
+
+	ans := 0.0
+	for i := maxIdx - k + 1; i <= maxIdx; i++ {
+		ans += expectedValue(p[i])
 	}
 
 	fmt.Printf("%f\n", ans)
