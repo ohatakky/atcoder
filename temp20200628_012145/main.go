@@ -2,7 +2,6 @@ package main
 
 import (
 	"bufio"
-	"fmt"
 	"io"
 	"os"
 	"sort"
@@ -11,53 +10,10 @@ import (
 )
 
 func main() {
-	s := readString()
+	a := readf()
+	b := readf()
+	x := readf()
 
-	rIdx := 0
-	mapR := make(map[int]int)
-	for i := 0; i < len(s); i++ {
-		if string(s[i]) == "R" {
-			mapR[i] = i
-			rIdx = i
-		} else {
-			mapR[i] = rIdx
-		}
-	}
-	lIdx := len(s) - 1
-	mapL := make(map[int]int)
-	for i := len(s) - 1; i >= 0; i-- {
-		if string(s[i]) == "L" {
-			mapL[i] = i
-			lIdx = i
-		} else {
-			mapL[i] = lIdx
-		}
-	}
-
-	agg := make(map[int]int)
-	for i := 0; i < len(s); i++ {
-		if string(s[i]) == "R" {
-			dist := mapL[i] - i
-			if dist%2 == 0 {
-				agg[i+dist]++
-			} else {
-				agg[i+dist-1]++
-			}
-		} else {
-			dist := i - mapR[i]
-			if dist%2 == 0 {
-				agg[i-dist]++
-			} else {
-				agg[i-dist+1]++
-			}
-		}
-	}
-
-	ans := ""
-	for i := 0; i < len(s); i++ {
-		ans = ans + " " + strconv.Itoa(agg[i])
-	}
-	fmt.Println(ans[1:])
 }
 
 /*-------------------utilities-------------------*/
