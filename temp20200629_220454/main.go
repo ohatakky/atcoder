@@ -29,10 +29,10 @@ func main() {
 	idx := m - 1
 	for i := 0; i < n; i++ {
 		tmp := a[i]
-		cnt := 0
 		if tmp > k {
 			break
 		}
+		cnt := i + 1
 		for j := idx; j >= 0; j-- {
 			if tmp+b[j] <= k {
 				cnt += j + 1
