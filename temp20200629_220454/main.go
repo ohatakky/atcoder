@@ -31,9 +31,7 @@ func main() {
 		tmp := a[i]
 		cnt := 0
 		if tmp > k {
-			tmp = 0
-		} else {
-			cnt = i + 1
+			break
 		}
 		for j := idx; j >= 0; j-- {
 			if tmp+b[j] <= k {
