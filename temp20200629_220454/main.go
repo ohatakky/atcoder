@@ -26,17 +26,21 @@ func main() {
 	}
 
 	ans := 0
+	idx := m - 1
 	for i := 0; i < n; i++ {
 		tmp := a[i]
+		cnt := 0
 		if tmp > k {
-			break
+			tmp = 0
+		} else {
+			cnt = i + 1
 		}
-		cnt := i + 1
-		for j := 0; j < m; j++ {
-			if tmp+b[j] > k {
+		for j := idx; j >= 0; j-- {
+			if tmp+b[j] <= k {
+				cnt += j + 1
+				idx = j
 				break
 			}
-			cnt++
 		}
 		ans = max(ans, cnt)
 	}
