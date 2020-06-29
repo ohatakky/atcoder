@@ -25,14 +25,15 @@ func main() {
 		b[i] = b[i-1] + readi()
 	}
 
+	a = append(a[:0], append([]int{0}, a[0:]...)...)
 	ans := 0
 	idx := m - 1
-	for i := 0; i < n; i++ {
+	for i := 0; i <= n; i++ {
 		tmp := a[i]
 		if tmp > k {
 			break
 		}
-		cnt := i + 1
+		cnt := i
 		for j := idx; j >= 0; j-- {
 			if tmp+b[j] <= k {
 				cnt += j + 1
