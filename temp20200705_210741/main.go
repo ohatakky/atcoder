@@ -11,9 +11,7 @@ import (
 )
 
 const (
-	white = "."
 	black = "#"
-	red   = "*"
 )
 
 var (
@@ -39,48 +37,23 @@ func main() {
 
 	ans := 0
 	for i := 0; i < (1 << uint(h)); i++ {
-		tmp := make([][]string, h)
-		for t := 0; t < h; t++ {
-			tmp[t] = make([]string, w)
-			copy(tmp[t], c[t])
-		}
-		for j := 0; j < h; j++ {
-			if i>>uint(j)&1 == 1 {
-				for ii := 0; ii < (1 << uint(w)); ii++ {
-					tmp2 := make([][]string, h)
-					for t := 0; t < h; t++ {
-						tmp2[t] = make([]string, w)
-						copy(tmp2[t], tmp[t])
-					}
-					for jj := 0; jj < w; jj++ {
-						if ii>>uint(jj)&1 == 1 {
-							tmp2[j][jj] = red
-						}
-					}
-					fmt.Printf("H: %s, W: %s\n", fmt.Sprintf("%02b", i), fmt.Sprintf("%03b", ii))
-					fmt.Println(tmp2)
-					cnt := countBlack(tmp2)
-					if cnt == k {
-						ans++
+		for ii := 0; ii < (1 << uint(w)); ii++ {
+			cnt := 0
+			for j := 0; j < h; j++ {
+				for jj := 0; jj < w; jj++ {
+					if i>>uint(j)&1 == 0 && ii>>uint(jj)&1 == 0 && c[j][jj] == black {
+						cnt++
 					}
 				}
 			}
+			if cnt == k {
+				ans++
+			}
+			cnt = 0
 		}
 	}
 
 	fmt.Println(ans)
-}
-
-func countBlack(tmp [][]string) int {
-	cnt := 0
-	for _, t := range tmp {
-		for _, v := range t {
-			if v == black {
-				cnt++
-			}
-		}
-	}
-	return cnt
 }
 
 /*-------------------utilities-------------------*/
