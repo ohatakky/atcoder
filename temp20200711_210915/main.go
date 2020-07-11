@@ -8,28 +8,27 @@ import (
 	"sort"
 	"strconv"
 	"strings"
-
-	"math"
 )
 
-const N = 41
+const N = 100
 
 func main() {
-	n := readf()
+	n := readi()
 
-	for i := 1; i <= int(n); i++ {
-		ans := 0
-		for x := 1; x <= N; x++ {
-			for y := 1; y <= N; y++ {
-				for z := 1; z <= N; z++ {
-					tmp := math.Pow(float64(x), 2) + math.Pow(float64(y), 2) + math.Pow(float64(z), 2) + float64((x*y)+(x*z)+(y*z))
-					if tmp == float64(i) {
-						ans++
-					}
+	ans := make([]int, n)
+	for x := 1; x <= N; x++ {
+		for y := 1; y <= N; y++ {
+			for z := 1; z <= N; z++ {
+				tmp := x*x + y*y + z*z + x*y + x*z + y*z
+				if tmp <= n {
+					ans[tmp-1]++
 				}
 			}
 		}
-		fmt.Println(ans)
+	}
+
+	for _, v := range ans {
+		fmt.Println(v)
 	}
 }
 
