@@ -2,17 +2,19 @@ package main
 
 import (
 	"bufio"
-	"fmt"
 	"io"
 	"os"
 	"sort"
 	"strconv"
 	"strings"
+
+	"github.com/fatih/color"
 )
 
 const (
 	white = "."
 	black = "#"
+	red   = "*"
 )
 
 var (
@@ -36,7 +38,23 @@ func main() {
 		}
 	}
 
-	fmt.Println(c)
+	for i := 0; i < (1 << uint(h)); i++ {
+		color.Blue("%d", i)
+		for j := 0; j < h; j++ {
+			if i>>uint(j)&1 == 1 {
+
+				for ii := 0; ii < (1 << uint(w)); ii++ {
+					color.Yellow("%d", ii)
+					for jj := 0; jj < w; jj++ {
+						if ii>>uint(jj)&1 == 1 {
+
+						}
+					}
+				}
+
+			}
+		}
+	}
 }
 
 /*-------------------utilities-------------------*/
