@@ -24,28 +24,20 @@ func main() {
 	x = readi()
 	y = readi()
 
-	ab := 0
-	if a+b < 2*c {
-		ab = a + b
-	} else {
-		ab = 2 * c
-	}
+	// ABピザに対して、全探索をする
+	for i := 0; i <= x+y; i++ {
+		cc := i
+		ac := x - cc
+		if ac < 0 {
+			ac = 0
+		}
+		bc := y - cc
+		if bc < 0 {
+			bc = 0
+		}
 
-	ans := 0
-	if x < y {
-		ans = x * ab
-		if b < 2*c {
-			ans = ans + (y-x)*b
-		} else {
-			ans = ans + (y-x)*ab
-		}
-	} else {
-		ans = y * ab
-		if a < 2*c {
-			ans = ans + (x-y)*a
-		} else {
-			ans = ans + (x-y)*ab
-		}
+		tmp := (2 * c * cc) + ac*a + bc*b
+		ans = min(ans, tmp)
 	}
 
 	fmt.Println(ans)
