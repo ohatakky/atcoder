@@ -24,26 +24,31 @@ func main() {
 	x = readi()
 	y = readi()
 
-	dfs(0, 0, 0)
+	ab := 0
+	if a+b < 2*c {
+		ab = a + b
+	} else {
+		ab = 2 * c
+	}
+
+	ans := 0
+	if x < y {
+		ans = x * ab
+		if b < 2*c {
+			ans = ans + (y-x)*b
+		} else {
+			ans = ans + (y-x)*ab
+		}
+	} else {
+		ans = y * ab
+		if a < 2*c {
+			ans = ans + (x-y)*a
+		} else {
+			ans = ans + (x-y)*ab
+		}
+	}
 
 	fmt.Println(ans)
-}
-
-func dfs(ac, bc, cc int) {
-	fmt.Println(ans)
-	if ac+cc/2 >= x && bc+cc/2 >= y {
-		ans = min(ans, ac*a+bc*b+cc*c)
-		return
-	}
-	if ac+cc/2 <= x {
-		dfs(ac+1, bc, cc)
-	}
-	if bc+cc/2 <= y {
-		dfs(ac, bc+1, cc)
-	}
-	if ac+cc/2 <= x || bc+cc/2 <= y {
-		dfs(ac, bc, cc+1)
-	}
 }
 
 /*-------------------utilities-------------------*/
