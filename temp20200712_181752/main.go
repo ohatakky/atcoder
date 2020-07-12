@@ -2,7 +2,9 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"io"
+	"math"
 	"os"
 	"sort"
 	"strconv"
@@ -10,7 +12,31 @@ import (
 )
 
 func main() {
+	n := readi()
+	x := make([]int, n)
+	y := make([]int, n)
+	for i := 0; i < n; i++ {
+		x[i] = readi()
+		y[i] = readi()
+	}
+	p := make([]int, 0)
+	for i := 0; i < n; i++ {
+		p = append(p, i)
+	}
 
+	sum := 0.0
+	permutations := nextPermutations(p)
+	for _, ps := range permutations {
+		for i := 1; i < n; i++ {
+			diffx := x[ps[i-1]] - x[ps[i]]
+			diffy := y[ps[i-1]] - y[ps[i]]
+			dist := math.Sqrt(float64(diffx*diffx) + float64(diffy*diffy))
+			sum += dist
+		}
+	}
+
+	ans := sum / float64(len(permutations))
+	fmt.Println(ans)
 }
 
 /*-------------------utilities-------------------*/
