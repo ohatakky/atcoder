@@ -22,14 +22,16 @@ func main() {
 	}
 
 	ans := 0
-	for i := 0; i < n; i++ {
-		tmp := 0
-		for j := 0; j < m; j++ {
-			for k := j + 1; k < m; k++ {
-				tmp = max(a[i][j], a[i][k])
+	for j := 0; j < m; j++ {
+		for k := j + 1; k < m; k++ {
+			tmp := 0
+			for i := 0; i < n; i++ {
+				tmp += max(a[i][j], a[i][k])
+			}
+			if ans < tmp {
+				ans = tmp
 			}
 		}
-		ans += tmp
 	}
 
 	fmt.Println(ans)
