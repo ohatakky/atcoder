@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"fmt"
 	"io"
-	"math/rand"
 	"os"
 	"sort"
 	"strconv"
@@ -17,57 +16,41 @@ type City struct {
 	Idx        int
 }
 
+type Cities []City
+
+func (c Cities) Len() int {
+	return len(c)
+}
+
+func (c Cities) Less(i, j int) bool {
+	return c[i].Year < c[j].Year
+}
+func (c Cities) Swap(i, j int) {
+	c[i], c[j] = c[j], c[i]
+}
+
 func main() {
 	n := readi()
 	n = n
-
 	m := readi()
-	p := make([]int, m)
-	y := make([]int, m)
+	cities := make(Cities, m)
 	for i := 0; i < m; i++ {
-		p[i] = readi()
-		y[i] = readi()
+		cities[i].Prefecture = readi()
+		cities[i].Year = readi()
+		cities[i].Idx = i
 	}
-
-	// yが早い順に並べる
-	quicksort(y, p)
-
-	fmt.Println(p)
-	fmt.Println(y)
+	sort.Sort(Cities(cities))
 
 	agg := make(map[int]int)
+	ans := make([]string, m)
 	for i := 0; i < m; i++ {
-		agg[p[i]]++
-		fmt.Printf("%06d%06d\n", p[i], agg[p[i]])
-	}
-}
-
-func quicksort(x, y []int) {
-	if len(x) < 2 {
-		return
+		agg[cities[i].Prefecture]++
+		ans[cities[i].Idx] = fmt.Sprintf("%06d%06d", cities[i].Prefecture, agg[cities[i].Prefecture])
 	}
 
-	left, right := 0, len(x)-1
-	pivot := rand.Int() % len(x)
-
-	x[pivot], x[right] = x[right], x[pivot]
-	y[pivot], y[right] = y[right], y[pivot]
-
-	for i, _ := range x {
-		if x[i] < x[right] {
-			x[left], x[i] = x[i], x[left]
-			y[left], y[i] = y[i], y[left]
-			left++
-		}
+	for i := 0; i < m; i++ {
+		fmt.Println(ans[i])
 	}
-
-	x[left], x[right] = x[right], x[left]
-	y[left], y[right] = y[right], y[left]
-
-	quicksort(x[:left], y[:left])
-	quicksort(x[left+1:], y[left+1:])
-
-	return
 }
 
 /*-------------------utilities-------------------*/
