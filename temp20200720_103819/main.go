@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"io"
 	"os"
 	"sort"
@@ -10,7 +11,39 @@ import (
 )
 
 func main() {
+	n := readi()
+	m := readi()
+	h := make([]int, n+1)
+	for i := 0; i < n; i++ {
+		h[i+1] = readi()
+	}
+	agg := make(map[int][]int)
+	for i := 0; i < m; i++ {
+		a := readi()
+		b := readi()
+		agg[a] = append(agg[a], b)
+		agg[b] = append(agg[b], a)
+	}
 
+	ans := 0
+	for i := 0; i < n; i++ {
+		flag := true
+		list, ok := agg[i+1]
+		if !ok {
+			ans++
+			continue
+		}
+		for _, dist := range list {
+			if h[i+1] <= h[dist] {
+				flag = false
+			}
+		}
+		if flag {
+			ans++
+		}
+	}
+
+	fmt.Println(ans)
 }
 
 /*-------------------utilities-------------------*/
@@ -171,7 +204,7 @@ type Graph struct {
 	edges [][]int
 }
 
-func newGraph(n int) *Graph {
+func NewGraph(n int) *Graph {
 	g := &Graph{
 		n:     n,
 		edges: make([][]int, n),
@@ -179,7 +212,7 @@ func newGraph(n int) *Graph {
 	return g
 }
 
-func (g *Graph) addEdge(u, v int) {
+func (g *Graph) AddEdge(u, v int) {
 	g.edges[v] = append(g.edges[v], u)
 	g.edges[u] = append(g.edges[u], v)
 }
