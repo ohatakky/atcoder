@@ -36,6 +36,22 @@ func max(x, y int) int {
 	return y
 }
 
+// func chmin(x *int, y int) bool {
+// 	if *x > y {
+// 		*x = y
+// 		return true
+// 	}
+// 	return false
+// }
+
+// func chmax(x *int, y int) bool {
+// 	if *x < y {
+// 		*x = y
+// 		return true
+// 	}
+// 	return false
+// }
+
 func gcd(a, b int) int {
 	if b == 0 {
 		return a
@@ -166,59 +182,6 @@ func (q *Queue) size() int {
 	return len(q.items)
 }
 
-type Graph struct {
-	n     int
-	edges [][]int
-}
-
-func NewGraph(n int) *Graph {
-	g := &Graph{
-		n:     n,
-		edges: make([][]int, n),
-	}
-	return g
-}
-
-func (g *Graph) AddEdge(u, v int) {
-	g.edges[v] = append(g.edges[v], u)
-	g.edges[u] = append(g.edges[u], v)
-}
-
-func dfs(c int, edges [][]int, visited map[int]struct{}) {
-	visited[c] = struct{}{}
-
-	for _, v := range edges[c] {
-		_, flag := visited[v]
-		if flag {
-			continue
-		}
-		dfs(v, edges, visited)
-	}
-}
-
-func bfs(c int, graph *Graph) {
-	next := make([]int, 0)
-	next = append(next, c)
-	visited := make(map[int]struct{})
-
-	for len(next) != 0 {
-		u := next[0]
-		next = next[1:]
-		visited[u] = struct{}{}
-
-		for _, v := range graph.edges[u] {
-			_, flag := visited[v]
-			if flag {
-				continue
-			}
-
-			// なにか処理
-
-			next = append(next, v)
-		}
-	}
-}
-
 /*-------------------init-------------------*/
 
 const (
@@ -254,14 +217,6 @@ func readf() float64 {
 		panic(err.Error())
 	}
 	return f
-}
-
-func readiSlice(n int) []int {
-	slice := make([]int, n)
-	for i := 0; i < n; i++ {
-		slice[i] = readi()
-	}
-	return slice
 }
 
 func newReadString(ior io.Reader) func() string {
