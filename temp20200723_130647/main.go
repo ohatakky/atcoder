@@ -22,22 +22,40 @@ func main() {
 		h[i] = readi()
 	}
 
-	DFS(0, 0)
-}
-
-func DFS(depth, cost int) {
-	if depth >= n-1 {
-		fmt.Println(cost)
-		return
+	// N <= 10^5なのでO(N)で通す必要がある。
+	ans := make([]int, n)
+	for i := 0; i < n; i++ {
+		ans[i] = INF
+	}
+	ans[1] = abs(h[0] - h[1])
+	if n > 2 {
+		ans[2] = abs(h[0] - h[2])
+	}
+	for i := 0; i < n; i++ {
+		if i < n-1 {
+			ans[i+1] = min(ans[i+1], ans[i]+abs(h[i]-h[i+1]))
+		}
+		if i < n-2 {
+			ans[i+2] = min(ans[i+2], ans[i]+abs(h[i]-h[i+2]))
+		}
 	}
 
-	if depth <= n-2 {
-		DFS(depth+1, cost+abs(h[depth]-h[depth+1]))
-	}
-	if depth <= n-3 {
-		DFS(depth+2, cost+abs(h[depth]-h[depth+2]))
-	}
+	fmt.Println(ans[n-1])
 }
+
+// func DFS(depth, cost int) {
+// 	if depth >= n-1 {
+// 		fmt.Println(cost)
+// 		return
+// 	}
+
+// 	if depth <= n-2 {
+// 		DFS(depth+1, cost+abs(h[depth]-h[depth+1]))
+// 	}
+// 	if depth <= n-3 {
+// 		DFS(depth+2, cost+abs(h[depth]-h[depth+2]))
+// 	}
+// }
 
 /*-------------------utilities-------------------*/
 
