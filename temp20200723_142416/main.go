@@ -38,19 +38,19 @@ func main() {
 		for j := 0; j < 3; j++ {
 			switch j {
 			case 0:
-				dp[i][0] = max(dp[i-1][1], dp[i-1][1]+v[i].a)
-				dp[i][0] = max(dp[i-1][2], dp[i-1][2]+v[i].a)
+				tmp1 := max(dp[i-1][1], dp[i-1][1]+v[i].a)
+				tmp2 := max(dp[i-1][2], dp[i-1][2]+v[i].a)
+				dp[i][0] = max(tmp1, tmp2)
 			case 1:
-				dp[i][1] = max(dp[i-1][0], dp[i-1][0]+v[i].b)
-				dp[i][1] = max(dp[i-1][2], dp[i-1][2]+v[i].b)
+				tmp1 := max(dp[i-1][0], dp[i-1][0]+v[i].b)
+				tmp2 := max(dp[i-1][2], dp[i-1][2]+v[i].b)
+				dp[i][1] = max(tmp1, tmp2)
 			case 2:
-				dp[i][2] = max(dp[i-1][0], dp[i-1][0]+v[i].c)
-				dp[i][2] = max(dp[i-1][1], dp[i-1][1]+v[i].c)
+				tmp1 := max(dp[i-1][0], dp[i-1][0]+v[i].c)
+				tmp2 := max(dp[i-1][1], dp[i-1][1]+v[i].c)
+				dp[i][2] = max(tmp1, tmp2)
 			}
 		}
-	}
-	for i := 0; i < n; i++ {
-		fmt.Println(dp[i])
 	}
 
 	ans := 0
